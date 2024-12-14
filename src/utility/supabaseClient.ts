@@ -1,8 +1,7 @@
 import { createClient } from "@refinedev/supabase";
 
-const SUPABASE_URL = "https://zjezqbpfaixyexnpmvrk.supabase.co";
-const SUPABASE_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqZXpxYnBmYWl4eWV4bnBtdnJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQxNjU5MTUsImV4cCI6MjA0OTc0MTkxNX0.DRKseaU6Artp6woQkgMHme4a44K3ljA5psuSVRI6yRc";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY, {
   db: {
