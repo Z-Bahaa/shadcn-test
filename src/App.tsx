@@ -24,8 +24,6 @@ import authProvider from "./authProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import {
-  WarehouseTripCreate,
-  WarehouseTripEdit,
   WarehouseTripList,
   WarehouseTripShow,
 } from "./pages/warehouse-trips";
@@ -49,8 +47,6 @@ function App() {
                   {
                     name: "warehouse_trips",
                     list: "/warehouse_trips",
-                    create: "/warehouse_trips/create",
-                    edit: "/warehouse_trips/edit/:id",
                     show: "/warehouse_trips/show/:id",
                     meta: {
                       canDelete: true,
@@ -86,8 +82,6 @@ function App() {
                     />
                     <Route path="/warehouse_trips">
                       <Route index element={<WarehouseTripList />} />
-                      <Route path="create" element={<WarehouseTripCreate />} />
-                      <Route path="edit/:id" element={<WarehouseTripEdit />} />
                       <Route path="show/:id" element={<WarehouseTripShow />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />

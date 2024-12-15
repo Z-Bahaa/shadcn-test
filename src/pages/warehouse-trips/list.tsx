@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   DateField,
   DeleteButton,
@@ -13,8 +14,24 @@ import { Space, Table,Typography } from "antd";
 const { Text, } = Typography;
 
 export const WarehouseTripList = () => {
+  const [statusFilter, setStatusFilter] = useState<string | null>(null)
+  const [warehouseTypeNameFilter, setWarehouseTypeNameFilter] = useState<string | null>(null)
   const { tableProps } = useTable({
     syncWithLocation: true,
+    filters:{
+      permanent: [
+        {
+          field: "status",
+          operator: "eq",
+          value: statusFilter,
+        },
+        {
+          field: "warehouse_type_name",
+          operator: "eq",
+          value: warehouseTypeNameFilter,
+        },
+      ]
+    }
   });
   
 
@@ -22,10 +39,8 @@ export const WarehouseTripList = () => {
     <List>
       <Table 
         {...tableProps} 
-        // rowKey="id"
       >
         <Table.Column 
-          // dataIndex="id" 
           title={"Vehicle / ID / Collector"}
           render={(value, record) => (
             <Space>
@@ -75,10 +90,14 @@ export const WarehouseTripList = () => {
         <Table.Column 
           dataIndex="distance" 
           title={"Distance"} 
-          render={(value) => `${value} kilos`}
+          render={(value) => value == 0 || !value ? '--' :`${value} kilos`}
         />
-        <Table.Column dataIndex="status" title={"Status"} />
-        {/* <Table.Column
+        <Table.Column 
+          dataIndex="status" 
+          title={"Status"} 
+          
+        />
+        <Table.Column
           title={"Actions"}
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
@@ -88,7 +107,7 @@ export const WarehouseTripList = () => {
               <DeleteButton hideText size="small" recordItemId={record.id} />
             </Space>
           )}
-        /> */}
+        />
       </Table>
     </List>
   );
